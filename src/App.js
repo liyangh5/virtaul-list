@@ -1,25 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { lazy, Suspense } from 'react';
+import { Spin } from 'antd';
+// import {Home} from './componment/home/index';
+// import {News} from './componment/news/index';
+// import {Profile} from './componment/profile/index';
+// import { HashRouter as Router, Route, Link } from 'react-router-dom';
+// import 'antd/dist/antd.css'
+// import PubSub from 'pubsub-js';
 
-function App() {
+const Home = lazy(() => { 
+ return import('./componment/home/index')
+
+})
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Suspense fallback={<Spin/>}>
+       <Home />
+    </Suspense>
+  )
 }
+
 
 export default App;
